@@ -2,6 +2,7 @@ from django.db import models
 from ..models import Author, Tag
 from .validators import XSS_validator
 from django.utils import timezone
+import uuid
 
 
 def get_image_upload_path(instance, filename):
@@ -9,7 +10,8 @@ def get_image_upload_path(instance, filename):
 
 
 class Article(models.Model):
-    artID = models.AutoField(primary_key=True)
+    artID = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False)
     artName = models.CharField(max_length=255, validators=[XSS_validator])
     artImg = models.ImageField(
         upload_to=get_image_upload_path, null=True, blank=True)
@@ -20,7 +22,8 @@ class Article(models.Model):
     artDisagree = models.IntegerField(default=0)
     authID = models.ForeignKey(
         Author, on_delete=models.CASCADE, related_name='articles')
-    artTags = models.ManyToManyField(Tag, related_name='articletag', blank=True)
+    artTags = models.ManyToManyField(
+        Tag, related_name='articletag', blank=True)
 
     def __str__(self):
         return self.artName

@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from ..models import Article
 from ..serializers import ArticleSerializer
 from datetime import datetime, timedelta
@@ -16,7 +17,8 @@ class FilterArticlesByCreatedDateView(APIView):
     }
     """
     serializer_class = ArticleSerializer
-    permission_classes = [permissions.AllowAny]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
     http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):

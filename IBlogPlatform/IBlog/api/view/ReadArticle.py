@@ -8,8 +8,8 @@ from ..serializers import ArticleSerializer
 
 class ReadArticleView(APIView):
     serializer_class = ArticleSerializer
-    # authentication_classes = [JWTAuthentication]
-    permission_classes = [permissions.AllowAny]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
     allow_methods = ['GET']
 
     def get(self, request, *args, **kwargs):

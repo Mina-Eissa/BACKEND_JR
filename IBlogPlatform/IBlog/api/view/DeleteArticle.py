@@ -8,8 +8,8 @@ from ..serializers import ArticleSerializer, TagSerializer
 
 class DeleteArticleView(APIView):
     serializer_class = ArticleSerializer
-    # authentication_classes = [JWTAuthentication]
-    permission_classes = [permissions.AllowAny]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
     allowed_methods = ['DELETE']
 
     def delete(self, request, *args, **kwargs):

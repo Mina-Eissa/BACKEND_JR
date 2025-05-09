@@ -8,8 +8,8 @@ from ..serializers import ArticleSerializer, TagSerializer
 
 class UpdateArticleView(APIView):
     serializer_class = ArticleSerializer
-    # authentication_classes = [JWTAuthentication]
-    permission_classes = [permissions.AllowAny]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
     http_method_names = ['post', 'put']
 
     def post(self, request, *args, **kwargs):

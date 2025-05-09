@@ -34,7 +34,7 @@ class AuthorLoggingInView(APIView):
                 else:
                     author = Author.objects.get(authName=username_or_email)
             except Author.DoesNotExist:
-                return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
+                return Response({"error": "Invalid credentials"}, status=status.HTTP_404_NOT_FOUND)
 
             # Verify the password
             if check_password(password, author.authPassword):

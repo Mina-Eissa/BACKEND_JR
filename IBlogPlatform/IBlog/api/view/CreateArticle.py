@@ -8,8 +8,8 @@ from ..serializers import ArticleSerializer, TagSerializer
 
 class CreateArticleView(APIView):
     serializer_class = ArticleSerializer
-    # authentication_classes = [JWTAuthentication]
-    permission_classes = [permissions.AllowAny]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         tags_data = request.data.get('artTags', [])
